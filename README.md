@@ -1,24 +1,14 @@
-# README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+Tester le site En local :
 
-* Ruby version
+bundle install
+rails db:create
+rails db:migrate
+rails db:seed
+rails server
 
-* System dependencies
+puis http://localhost:3000/
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Dispo sur https://pure-depths-62995.herokuapp.com
+(le db:seed est bloqué après trop de tentative d'envoie d'email...)
