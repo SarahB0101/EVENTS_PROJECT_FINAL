@@ -1,0 +1,39 @@
+
+<h1>New User</h1>
+
+ <%= form_tag url_for([@user]), method: "post" do %>
+
+	      <%= label_tag 'Nom :' %>
+	      <%= text_field_tag 'last_name', '', class: "form-control", placeholder:"tappez votre nom ici", required: true %>
+	      <br/> <br/>
+
+	      <%= label_tag 'Prénom :' %>
+	      <%= text_field_tag 'first_name', '', class: "form-control", placeholder:"tappez votre prénom ici", required: true %>
+	      <br/> <br/>
+
+
+	      <%= label_tag 'Description :' %>
+	      <%= text_field_tag 'description', '', class: "form-control", placeholder:"tappez votre description ici", required: true %>
+	      <br/> <br/>
+
+	      <%= label_tag 'Email :' %>
+	      <%= text_field_tag 'email', '', class: "form-control", placeholder:"tappez votre email ici", required: true %>
+	      <br/> <br/>
+
+	      <%= label_tag 'Mot de passe :' %>
+	      <%= password_field_tag 'password', '', class: "form-control", placeholder:"tappez votre mot de passe ici", required: true %>
+	      <br/> <br/>
+
+	      <%= label_tag 'Confirmation :' %>
+	      <%= password_field_tag 'password_confirmation', '', class: "form-control", placeholder:"confirmez votre mot de passe ici", required: true %>
+	      <br/> <br/>
+	     
+
+
+	      <%= submit_tag "Valider mon inscription", class: "btn btn-dark" %>
+
+	    <% end %>
+
+	    
+
+		<%= link_to 'Back', users_path %>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>The Events Project</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+
+  </head>
+
+  <body>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-12 mt-5">
+      <br/>
+      <br/>
+
+      <div class="jumbotron">
+        <div class="container">
+          
+          
+          
+        </div>
+      </div>
+
+
+
+
+
+
+<section ">
+  <div class="row">
+    <% Event.all.each do |event| %>
+
+      <div class="col-sm-6 col-md-4 col-lg-3">
+        <%= link_to(event_path(event)) do %>
+
+          <div class="card">     
+            <div class="card-body">
+              <h5 class="card-title"><%= event.title %></h5>
+              <p class="card-text"><%= event.description %></p>
+              <p class="card-text"><%= event.start_date %></p>
+              <aside class="price">
+                <p class="card-text"><strong><%= event.price %>€</strong></p>
+              </aside>
+              <p class="card-text"><%= event.location %></p>
+            </div>
+          </div>
+
+        <% end %>
+      </div>
+      
+    <% end %>
+  </div>
+
+</section>
+
+
+
+    <%= yield %>
+  </body>
+
+
+
+</html>

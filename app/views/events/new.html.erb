@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>The Events Project</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+
+  </head>
+
+  <body>
+
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-6 col-md-6 mt-5">
+        <br/>
+        <br/>
+
+			<h1>Nouvel événement</h1>
+
+<%= form_tag url_for([@event]), method: "post" do %>
+
+	      <%= label_tag 'Titre :' %>
+	      <%= text_field_tag 'title', '', class: "form-control", placeholder:"Entrez le titre de l'événement", required: true %>
+	      <br/> <br/>
+
+	      <%= label_tag 'Description:' %>
+	      <%= text_field_tag 'description', '', class: "form-control", placeholder:"Entrez la description de l'événement", required: true %>
+	      <br/> <br/>
+
+
+	      <%= label_tag 'Prix :' %>
+	      <%= text_field_tag 'price', '', class: "form-control", placeholder:"Entrez le prix de l'événement", required: true %>
+	      <br/> <br/>
+
+	      <%= label_tag 'Date :' %>
+	      <%= text_field_tag 'start_date', '', class: "form-control", placeholder:"Entrez la date de début", required: true %>
+	      <br/> <br/>
+
+	      <%= label_tag 'Date :' %>
+	      <%= text_field_tag 'duration', '', class: "form-control", placeholder:"Entrez la durée de l'événement", required: true %>
+	      <br/> <br/>
+
+	      <%= label_tag 'Lieu :' %>
+	      <%= text_field_tag 'location', '', class: "form-control", placeholder:"Entrez le lieu de l'événement", required: true %>
+	      <br/> <br/>
+	     
+
+
+	      <%= submit_tag "Enregistrer mon événement", class: "btn btn-primary btn-lg" %>
+
+	    <% end %>
+
+			<%= link_to 'Back', events_path %>
+
+
+
+		</div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+    <%= yield %>
+  </body>
+
+
+</html>
