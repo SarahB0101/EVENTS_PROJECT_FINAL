@@ -15,6 +15,14 @@ class EventsController < ApplicationController
 	def create
 		@event = Event.new(event_params)
 		@event.admin = current_user
+		@event.save
+		
+	    if @event.save
+	      redirect_to event_path(@event.id)
+	    else
+	      flash.now[:danger] = "Couldn't save."
+	      render action: "new"
+	    end
 	end
 
 	def edit

@@ -18,13 +18,14 @@ User.create(email:email, description:description, first_name:first_name, last_na
 end
 
 
-5.times do
+15.times do
 	start_date = Faker::Time.forward(days: 80)
 	duration = rand(12)*60
 	title = Faker::TvShows::BreakingBad.episode
 	price = rand(1..1000)
 	location = Faker::Address.city
 	admin = User.all.sample
+	description = Faker::TvShows::Friends.quote
 	Event.create(start_date:start_date, duration:duration, title:title, description:description, price:price, location:location, admin:admin)
 
 	#Event.create(title: Faker::TvShows::BreakingBad.episode, description: Faker::TvShows::Friends.quote, start_date: Faker::Date.forward(days: 23), duration: rand(60..500), price: rand(1..1000), location: Faker::Address.city, admin: User.all.sample)
