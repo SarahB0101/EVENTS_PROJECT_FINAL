@@ -1,0 +1,24 @@
+<br><br>
+<div class="container border bg-white rounded">
+  	<div class="row">
+
+   		<div class="col-md-6 offset-md-3 text-center">
+   			<h1 class="h3 mb-3 font-weight-normal text-center">Votre participation à l'évènement : <br><strong><%= @event.title %></strong><br>a bien été prise en compte !</h1>
+   			<p>Vous avez payé <strong><%=@event.price%>€</strong>!</p>
+   			<br>
+   			<h2>Rappel des détails de l'évènement :</h2>
+   			<p>Créé par <em><%= @event.admin.name %></em> <%= @event.admin.email %> </p>
+   			<p>début : <%= @event.start_date %></p>
+            <p>fin : <%= @event.end_date %></p>
+            <p><i class="fas fa-map-marker-alt text-warning"></i>  <%= @event.location %></p>
+            <div class="container bg-light border border-info rounded">
+              <p><strong>Description:</strong></p>
+              <p><%= @event.description %></p>
+            </div>
+            
+			<br>
+			<%= link_to "Retour à la page de l'évenement", event_path(@event) %>
+    	</div>
+  	</div>
+</div>
+

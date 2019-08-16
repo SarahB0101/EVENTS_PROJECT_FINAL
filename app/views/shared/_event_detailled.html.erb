@@ -1,0 +1,26 @@
+<h5 class="card-title">
+  <strong><%= event.title %><% if event.participate?(current_user) %> <span class="badge badge-secondary bg-success">Je participe !</span><% end %>
+    <% if event.admin == current_user %> <span class="badge badge-secondary bg-danger">Admin</span><% end %>
+  </strong>
+</h5>
+
+
+
+<p><i class="fas fa-map-marker-alt text-warning"></i>  <%= event.location %></p>
+<p>
+ 
+Créé par <em><%= event.admin.name %></em> <%= event.admin.email %> </p>
+<p><%= event.participants.count %> personnes participent à cet évenement </p>
+<p>
+  début : <%= event.start_date %>
+</p>
+<p>
+  fin : <%= event.end_date %>
+</p>
+
+
+
+<div class="container bg-light border border-info rounded">
+  <p><strong>Description:</strong></p>
+  <p><%= event.description %></p>
+</div>

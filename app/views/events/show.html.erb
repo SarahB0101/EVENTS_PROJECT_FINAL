@@ -1,49 +1,93 @@
 
-
   <div class="container">
     <div class="row">
       <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
         
+        
+        <!----------------------- INFO EVENEMENT --------------------------->
 
-
+        <section class="card">
           <div class="card-body">
-            <h1 class="card-title">
+            
+            <h5 class="card-title">
               <strong><%= @event.title %></strong>
-            </h1>
+            </h5>
 
-            <p><strong>Description:</strong></p>
-             <p> <%= @event.description %></p>
-            
+            <ul>
+              <li>L'événement se passe à <%= @event.location %></li>
+              <li>Il a été créé par <%= @event.admin.name %> <%= @event.admin.email %></li>
+              <li><%= @event.participants.count %> personnes participent à cet évenement </li>
+              <li>Il débute le <%= @event.start_date %></li>
 
-            <p>
-            <p><strong>Lieu:</strong></p>
-            <%= @event.location %></p>
-            <p>Créé par <em><%= @event.admin.name %></em> <%= @event.admin.email %> </p>
-            
-            <p><strong>Debut:</strong></p>
-            <p><%= @event.start_date %>
-            </p>
-            
-            <p><strong>Fin:</strong></p>
-            <p><%= @event.end_date %>
-            </p>
+              <li>Et prend fin le <%= @event.end_date %></li>
 
-            <p><strong>Prix:</strong></p>
-            <p class="price"><%= @event.price %>€</p>
-            <aside class="date">
-                 
-            
-            <p><strong>Nombre de participants:</strong></p>
-            <p><%= @event.participants.count %> personnes participent à cet évenement </p>
-            </div>
+              <li><strong><%= @event.price %>€</strong></li>
 
-            
-
-            <%= link_to 'Edit', edit_event_path(@event) %> |
+              <li><strong>Description:</strong><%= @event.description %></li>
+              
+            </ul>
+          
+            |
             <%= link_to 'Back', events_path %>
 
-          
-       
+
+            <!-- SI CURRENT_USER ≠ ADMIN && NON PARTICIPANTS, IL PEUT SE JOINDRE -->
+            <% if @event.participate?(current_user) %> <!-- si current_user est différent de admin ou participant ou nil alors il peut rejoindre l'event -->
+            <button type="button" class="btn btn-success">Participe</button>
+            <%end%>
+
+            <% if @event.can_participate?(current_user) %> 
+
+
+              <% if @event.can_participate?(current_user) &&  !@event.is_free? %>
+              <p><%= link_to 'Je participe !', new_event_attendance_path(@event), class:"btn btn-success float-right mt-1" %></p>
+            <% end %>
+            <% if @event.can_participate?(current_user) &&  @event.is_free? %>
+              <p><%= link_to 'Je participe !', event_attendances_path(@event), method: :post, class:"btn btn-success float-right mt-1" %></p>
+            <% end %>
+
+           
+
+            <!-- SI CURRENT_USER = ADMIN --> 
+            <% elsif current_user.id == @event.admin_id %>
+            <div class="card-header">Vous êtes l'organisateur de cet événement</div>
+
+            <% end %>
+
+
+
+
+            <!-- SI CURRENT_USER = ADMIN, IL PEUT VOIR LES PARTICIPANTS, DELETE OU UPDATE LES EVENTS -->
+
+            <% if current_user.id == @event.admin_id %>
+
+              <!-- VOIR LES PARTICIPANTS -->
+              <div class="d-flex flex-wrap justify-content-between" >
+                <% unless @participants.present?%>
+                  <%= link_to "no guest", class:"btn btn-secondary"%>
+                <% else %>
+                  <%= link_to "See guests", event_attendances_path(@event.id) ,class:"btn btn-secondary"%>
+                <% end %>
+
+
+                <!--SI CURRENT_USER = ADMIN, IL PEUT DELETE OU UPDATE-->
+                <%= link_to "Update", edit_event_path(@event.id), class:"btn btn-secondary"%>
+                </div>
+                <br/>
+
+                <div class="d-flex flex-wrap justify-content-between">
+                <%= link_to "Delete event", event_path(@event.id), method: :delete, confirm: "Êtes-vous sûr de supprimer l'évenement?", class:"btn btn-danger"%><br />
+              </div>
+
+            <% end %>
+
+            <% if @event.admin == current_user %>
+              <p><%= link_to 'mon espace événement', event_attendances_path(@event), class:"btn btn-primary float-right mt-1" %></p>
+            <% end %>
+
+
+          </div>
+        </section>
       </div>
     </div>
   </div>

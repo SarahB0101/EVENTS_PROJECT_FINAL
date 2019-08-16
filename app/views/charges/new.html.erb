@@ -1,0 +1,24 @@
+
+
+<h4>Hey user <%= current_user.id%>, règle le paime et rejoins l'événement <%= @event.id%>!<br /><br /></h4>
+<%= form_tag event_charges_path(@event.id) do %>
+  <article>
+    <% if flash[:danger].present? %>
+      <div id="error_explanation">
+        <p><%= flash[:danger] %></p>
+      </div>
+    <% end %>
+    <label class="amount">
+      <span class="text-success font-weight-bolder"><%= @amount%>€<br /><br /></span>
+    </label>
+  </article>
+
+
+
+
+  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+          data-description="A month's subscription"
+          data-amount="500"
+          data-locale="auto"></script>
+<% end %>

@@ -1,85 +1,47 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>The Events Project</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<br>
+<section class="card-events">
+  <h2>Mes infos</h2>
+  <div class="row">
+    <div class="col">
+    <p>
+      <strong>Email:</strong>
+      <%= @user.email %>
+    </p>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <p>
+      <strong>Description:</strong>
+      <%= @user.description %>
+    </p>
 
+    <p>
+      <strong>First name:</strong>
+      <%= @user.first_name %>
+    </p>
 
-  </head>
+    <p>
+      <strong>Last name:</strong>
+      <%= @user.last_name %>
+    </p>
 
-  <body>
-
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-6 col-md-6 mt-5">
-        <br/>
-        <br/>
-        <h1 class="text-center mb-5">Mon profile</h1>
-
-        <div class="card">
-          <img class="card-img-top" src="" alt="Card image cap">
-            
-          <div class="card-body">
-            <h5 class="card-title"><%= @user.first_name %> <%= @user.last_name %></h5>
-            <p class="card-text"><strong> Description :</strong> <%= @user.description %></p>
-            <p class="card-text"><strong> Email : </strong><%= @user.email %></p>
-            <p class="card-text"><strong> Mot de passe : </strong><%= @user.encrypted_password %></p>
-
-            <%= link_to 'Editer', edit_user_path(@user), class: "btn btn-lg btn-primary btn-block" %> 
-            <%= link_to "Editer email ou mot de passe", edit_user_registration_path , class: "btn btn-lg btn-primary btn-block" %>
-          </div>
-
-        </div> 
+    <%= link_to 'Edit', edit_user_path(@user) %> |
 
 
-        <section>
-          <h1>Mes évenements</h1>
-          <div class="row">
+      <%= link_to "Edit email / password", edit_user_registration_path %>
 
-            <% @user.administrated_events.each do |event| %>
 
-              <div class="col-sm-6 col-md-6 col-lg-6">
+  </div>
+  </div>
+</section>
+<br>
 
-                <%= link_to(event_path(event)) do %>
-                  <div class="card">     
-                    <div class="card-body">
-                      
-                      <h5 class="card-title"><%= event.title %></h5>
-                      <p class="card-text"><%= event.description %></p>
-                      <p class="card-text"><%= event.start_date %></p>
-                      
-                      <aside>
-                        <p class="card-text"><%= event.price %>€</p>
-                      </aside>`
 
-                      <p class="card-text"><%= event.location %></p>
-                    </div>
-                  </div>
-                <% end %>
-              </div>
 
-            <% end %>
-
-          </div>      
-
-      </div>
-    </div>
+<section class="card-events">
+  <h2>Mes évenements</h2>
+  <div class="row">
+    <% @user.administrated_events.each do |event| %>
+      <%= render 'shared/event-card', event: event %>
+    <% end %>
   </div>
 
 
-
-
-
-
-
-
-
-    <%= yield %>
-  </body>
-
-
-</html>

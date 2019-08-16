@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 	before_action :set_user, only: [:show, :edit, :update, :destroy]
 	before_action :authenticate_user!, only: [:show]
-	#before_action :redirect_to_root, if: :not_current_user?, only: [:show]
+	before_action :redirect_to_root, if: :not_current_user?, only: [:show]
 	
 
 	def index
@@ -44,9 +44,9 @@ class UsersController < ApplicationController
 	
 	private
 
-	# def not_current_user?
- #      return params[:id].to_i != current_user.id
- #    end
+	def not_current_user?
+      return params[:id].to_i != current_user.id
+    end
 
 	def set_user
       @user = User.find(params[:id])
@@ -54,5 +54,10 @@ class UsersController < ApplicationController
 
 	def user_params
       params.require(:user).permit(:email, :encrypted_password, :description, :first_name, :last_name)
+    end
+
+    def redirect_to_root
+      puts "$"*1000
+      redirect_to events_path
     end
 end
